@@ -7,6 +7,7 @@ public class MovePlayer : MonoBehaviour
     public float speed = 10f;
     public Vector2 lastPosClick;
     public bool moving;
+    public bool dialogo;
     void Update()
     {
         if (Input.GetMouseButtonDown(0)){
@@ -23,8 +24,9 @@ public class MovePlayer : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
-        if (col.gameObject.tag == "Fondo"){
+        if (col.gameObject.tag == "Fondo" || col.gameObject.tag == "NPC"){
             moving = false;
+            dialogo = true;
         }
     }
 
