@@ -36,4 +36,10 @@ public class MovePlayer : MonoBehaviour
         }
     }
 
+    private void OnCollisionExit2D(Collision2D col) {
+        if (col.gameObject.tag == "NPC"){
+            dialogo = false;
+        }
+    }
+
 }
