@@ -10,7 +10,7 @@ public class MovePlayer : MonoBehaviour
     public bool dialogo;
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)){
+        if (!Dialogos.GetIntance().is_dialogo && Input.GetMouseButtonDown(0)){
             lastPosClick = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             moving = true;
         }
