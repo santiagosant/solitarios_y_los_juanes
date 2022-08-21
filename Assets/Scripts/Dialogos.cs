@@ -39,7 +39,7 @@ public class Dialogos : MonoBehaviour
         choicesText = new TextMeshProUGUI[choices.Length];
         int index = 0;
         foreach (GameObject choice in choices){
-            choicesText[index] = choice.GetComponent<TextMeshProUGUI>();
+            choicesText[index] = choice.GetComponentInChildren<TextMeshProUGUI>();
             index++;
         }
     }
@@ -67,6 +67,13 @@ public class Dialogos : MonoBehaviour
             EnterDialogueMode(inkJson);
         }
 
+    }
+
+    private void Update() {
+        
+        if (Input.GetKeyDown(KeyCode.Space) && is_dialogo == true){
+            ContinueStory();
+        }
 
     }
 
@@ -89,7 +96,7 @@ public class Dialogos : MonoBehaviour
             Debug.LogError("Hay mas opciones " + currentChoices.Count + 
             " que las soportadas por la ui " + choices.Length);
         }
-        
+
         int index = 0;
         foreach (Choice choice in currentChoices)
         {
@@ -113,6 +120,11 @@ public class Dialogos : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         yield return new WaitForEndOfFrame();
         EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
+    }
+
+    public void MakeChoice(int choiceIndex){
+        story.ChooseChoiceIndex(choiceIndex);
+        ContinueStory();
     }
 
 }
